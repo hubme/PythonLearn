@@ -225,6 +225,8 @@ Hello VanceKing
 
 > 重新绑定全局变量
 
+* 使用globals函数获取回全局变量的字典，locals返回局部变量的字典。
+
 ```python
 >>> def changeGlobal():
 	global x
@@ -233,5 +235,32 @@ Hello VanceKing
 >>> changeGlobal()
 >>> x
 2
+```
+
+* 函数嵌套
+
+```python
+>>> def outter(a):
+	def inner(b):
+		return a * b;
+	return inner;
+>>> a = outter(2)
+>>> a(3)
+6
+
+>>> outter(3)(4)
+12
+```
+
+#### 6.6 递归
+
+```python
+>>> def power(x, n):
+	if n == 0:
+		return 1;
+	else:
+		return x * power(x, n-1);
+>>> power(2, 3)
+8
 ```
 
