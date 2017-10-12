@@ -264,3 +264,80 @@ Hello VanceKing
 8
 ```
 
+## 第七章 抽象
+
+#### 7.1.1 多态
+
+```python
+>>> from random import choice
+>>> name = choice(["Vance", ["King", "Judy"]])
+>>> name.count("an")
+1	//不管name 是“Vance”还是“["King", "Judy"]”，但是它们都实现了count()方法。
+```
+
+* 多态的多种形式
+
+  任何不知道对象到底是什么类型，但是又要对象“做点什么”的时候，都会用到多态。
+
+  ```python
+  >>> 1+1
+  2
+  >>> "Vance"+"King"
+  'VanceKing'
+  ```
+
+  * repr函数是多态特性的代表之一
+
+```python
+>>> repr(1)
+'1'
+>>> repr("Vance")
+"'Vance'"
+>>> repr((1, 2,))
+'(1, 2)'
+```
+
+#### 7.2.3 特性、函数和方法
+
+* self 
+
+self 参数事实上正式方法和函数的区别。也叫绑定方法。
+
+```python
+>>> class Class:
+	def method(self):
+		print "I have a self!"
+>>> def function():
+	print "I don't..."
+>>> instance = Class()
+>>> instance.method()
+I have a self!
+>>> instance.method = function
+>>> instance.method()
+I don't...
+```
+
+* 方法或特性私有化。在前面加双下划线
+
+```python
+>>> class Secretive:
+	def __inaccessible(self):
+		print "aaa";
+	def accessible(self):
+		print "bbb"
+		self.__inaccessible()		
+>>> s = Secretive()
+>>> s.__inaccessible()
+Traceback (most recent call last):
+  File "<pyshell#76>", line 1, in <module>
+    s.__inaccessible()
+AttributeError: Secretive instance has no attribute '__inaccessible'
+>>> s.accessible()
+bbb
+aaa
+
+//但是可以通过如下访问。类的内部定义中，所有已双下花心开始的名字都被'翻译'成前面加上单下划线和类名的形式。
+>>> s._Secretive__inaccessible()
+aaa
+```
+
