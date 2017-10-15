@@ -388,6 +388,11 @@ aaa
 >>> s = SPAMFilter()
 >>> s.init()
 >>> s.filter(["SPAMFilter","Vance", "King"])
+>>> ['Vance', 'King']
+
+#检测某个方法是否存在
+>>> hasattr(s, "init")
+True
 ```
 
 #### 7.2.6 检查继承
@@ -399,5 +404,26 @@ aaa
 True
 >>> issubclass(Filter, SPAMFilter)
 False
+
+#也可以检查对象
+>>> s = SPAMFilter()
+>>> isinstance(s, SPAMFilter)
+True
+>>> isinstance(s, Filter)
+True
+>>> isinstance(s, SPAMFilter)
+KeyboardInterrupt
+>>> isinstance(s, str)
+False
+
+#也可以使用特殊特性"__bases__"
+>>> SPAMFilter.__bases__
+(<class __main__.Filter at 0x0000000002794CA8>,)
+>>> Filter.__bases__
+()
+
+#使用"__class__"特性检查对象属于哪个类
+>>> s.__class__
+<class __main__.SPAMFilter at 0x0000000002962B88>
 ```
 
