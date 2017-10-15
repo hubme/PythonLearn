@@ -127,7 +127,7 @@ Hello
 
 ## 第六章 抽象
 
-#### 6.2 抽象和结构
+## 6.2 抽象和结构
 
 #### 6.3 创建函数
 
@@ -426,4 +426,75 @@ False
 >>> s.__class__
 <class __main__.SPAMFilter at 0x0000000002962B88>
 ```
+
+## 第8章 异常
+
+#### 8.2.1 raise 语句
+
+```python
+>>> raise Exception #引发一个异常
+Traceback (most recent call last):
+  File "<pyshell#41>", line 1, in <module>
+    raise Exception
+Exception
+
+>>> import exceptions
+>>> dir(exceptions)
+['ArithmeticError', 'AssertionError', 'AttributeError', 'BaseException', 'BufferError', 'BytesWarning', 'DeprecationWarning', 'EOFError', 'EnvironmentError', 'Exception', 'FloatingPointError', 'FutureWarning', 'GeneratorExit', 'IOError', 'ImportError', 'ImportWarning', 'IndentationError', 'IndexError', 'KeyError', 'KeyboardInterrupt', 'LookupError', 'MemoryError', 'NameError', 'NotImplementedError', 'OSError', 'OverflowError', 'PendingDeprecationWarning', 'ReferenceError', 'RuntimeError', 'RuntimeWarning', 'StandardError', 'StopIteration', 'SyntaxError', 'SyntaxWarning', 'SystemError', 'SystemExit', 'TabError', 'TypeError', 'UnboundLocalError', 'UnicodeDecodeError', 'UnicodeEncodeError', 'UnicodeError', 'UnicodeTranslateError', 'UnicodeWarning', 'UserWarning', 'ValueError', 'Warning', 'WindowsError', 'ZeroDivisionError', '__doc__', '__name__', '__package__']
+```
+
+* 自定义异常
+
+  ```python
+  #继承Exception类
+  >>> class CustomException(Exception):
+  	pass
+  >>> raise CustomException
+  Traceback (most recent call last):
+    File "<pyshell#48>", line 1, in <module>
+      raise CustomException
+  CustomException
+  ```
+
+  8.3 捕获异常
+
+* 使用try...except...
+
+```python
+>>> try:
+	x = input("Enter the first number: ")
+	y = input("Enter the second number: ")
+	print x / y
+	except ZeroDivisionError: #多个异常
+      print "ZeroDivisionError"
+    except TypeError:
+      print "TypeError"
+      
+#也可以这样写
+>>> try:
+	x = input("Enter the first number: ")
+	y = input("Enter the second number: ")
+	print x / y
+	except (ZeroDivisionError, TypeError): #多个异常
+      print "occur error!"
+   
+#捕获异常对象
+>>> try:
+	x = input("Enter the first number: ")
+	y = input("Enter the second number: ")
+	print x / y
+	except (ZeroDivisionError, TypeError), e: #多个异常
+      print e;
+      
+>>> try:
+  		1/0
+    except NameError:
+      print "Unknown variable"
+    else:
+      print "That went well!"
+    finally:
+      print "Cleaning up"
+```
+
+
 
