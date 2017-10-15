@@ -341,3 +341,63 @@ aaa
 aaa
 ```
 
+##### 7.2.4 类的命名空间
+
+```python
+>>> class MemberCounter:
+	members = 0	//全局变量，对所有实例都可见。
+	def init(self):
+		MemberCounter.members += 1;
+>>> m1 = MemberCounter();
+>>> m1.init();
+>>> MemberCounter.members
+1
+>>> m2 = MemberCounter();
+>>> m2.init();
+>>> MemberCounter.members
+2
+
+//类作用域的变量可以被所有实例访问
+>>> m1.members
+2
+>>> m2.members
+2
+
+>>> m1.members = "VanceKing" //重新绑定members特性
+>>> m1.members	//numbers值被写到了m1的特性上，屏蔽了类范围内的变量。
+'VanceKing'
+>>> m2.members
+2
+```
+
+#### 7.2.5 指定超类
+
+```python
+>>> class Filter():
+	def init(self):
+		self.blocked = []
+	def filter(self, sequence):
+		return [x for x in sequence if x not in self.blocked]
+>>> class SPAMFilter(Filter): #Filter 是 SPAMFilter 的父类
+	def init(self):	#重写父类的 init 方法
+		self.blocked = ["SPAMFilter"]
+>>> f = Filter()
+>>> f.init()
+>>> f.filter([1, 2, 3])
+[1, 2, 3]
+>>> s = SPAMFilter()
+>>> s.init()
+>>> s.filter(["SPAMFilter","Vance", "King"])
+```
+
+#### 7.2.6 检查继承
+
+* 检查一个类是否是另一个类的子类，用内建的issubclass函数
+
+```python
+>>> issubclass(SPAMFilter, Filter)
+True
+>>> issubclass(Filter, SPAMFilter)
+False
+```
+
