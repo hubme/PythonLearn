@@ -496,5 +496,56 @@ Exception
       print "Cleaning up"
 ```
 
+#### 9.2 构造方法
+
+```python
+>>> class FooBar:
+	def __init__(self):
+		self.number = 11
+>>> f = FooBar()
+>>> f.number
+11
+
+>>> class FooBar:
+	def __init__(self, value = 10):
+		self.number = value
+>>> f = FooBar()
+>>> f.number
+10
+>>> f = FooBar(6)
+>>> f.number
+6
+```
+
+```python
+>>> class Bird:
+	def __init__(self):
+		self.hungry = True;
+	def eat(self):
+		if self.hungry:
+			print "Aaaah"
+			self.hungry = False
+		else:
+			print "No, thanks!"
+>>> b = Bird();
+>>> b.eat()
+Aaaah
+>>> b.eat()
+No, thanks!
+
+>>> class SongBird(Bird):
+	def __init__(self):
+        Bird.__init__(self)
+		self.sound = "Squawk!"
+	def sing(self):
+		print self.sound	
+>>> sb = SongBird()
+>>> sb.sing()
+Squawk!
+>>> sb.eat() # AttributeError: SongBird instance has no attribute 'hungry'
+
+
+```
+
 
 
