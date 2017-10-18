@@ -568,5 +568,58 @@ Squawk!
 (1, 2)
 ```
 
+#### 9.5.1 property函数
 
+```python
+	__metaclass__ = type
+    class Rect:
+	def __init__(self):
+		self.width= 0;
+		self.height = 0
+	def setSize(self, size):
+		self.width, self.height = size
+	def getSize(self):
+		return self.width, self.height
+    size = property(getSize, setSize) #使用property函数创建的属性
+```
+
+#### 9.5.2 静态方法和类成员方法
+
+```python
+  >>> class MyClas:
+	def smeth():
+		print "This is s static method"
+	smeth = staticmethod(smeth) #静态方法使用 staticmethod 定义
+	def cmeth(cls):
+		print "This is a class method of class"
+	cmeth = classmethod(cmeth) #类成员方法使用 classmethod 定义
+    
+  #也可以这样写
+  >>> class MyClas:
+    @staticmethod
+	def smeth():
+		print "This is s static method"
+	@classmethod
+	def cmeth(cls):
+		print "This is a class method of class"
+
+```
+
+#### 9.5.3 拦截属性访问
+
+* __ getattribute__(self, name)
+
+  当特性name被访问时自动被调用(只能在新式类中使用)
+
+*  __ getattr__(self, name)
+
+   当特性name被访问且对象没有相应的特性被访问时被自动调用
+
+* __ setattr__(self, name, value)
+
+  当试图给特性name赋值时会被指定调用
+
+* __ delattr__(self, name)
+
+  当试图删除name时会被自动调用
 
