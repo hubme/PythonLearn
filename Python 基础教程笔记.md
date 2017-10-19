@@ -623,3 +623,55 @@ Squawk!
 
   当试图删除name时会被自动调用
 
+
+#### 9.6.2 从迭代器得到序列
+
+使用list构造方法显示的将迭代器转化为列表
+
+```python
+class TestIterator:
+	value = 0
+	def next(self):
+		self.value += 1
+		if self.value > 10:
+			raise StopIteration
+		return self.value
+	def __iter__(self):
+		return self
+>>> ti = TestIterator()
+>>> list(ti)
+[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+```
+
+#### 9.7.1 创建生成器
+
+```python
+>>> def flatten(nested):
+	for sublist in nested:
+		for element in sublist:
+			yield element		
+>>> nested = [[1, 2], [3, 4], [5, 6]]
+>>> for num in flatten(nested):
+	print num
+1
+2
+3
+4
+5
+6
+>>> list(flatten(nested))
+[1, 2, 3, 4, 5, 6]
+```
+
+* 生成器（并不会立刻进入循环）
+
+  ```python
+  >>> g = ((i+2)**2 for i in range(2, 27))
+  >>> g.next()
+  16
+
+  >>> sum(i**2 for i in range(10))
+  285
+  ```
+
+  ​
