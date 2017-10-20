@@ -674,4 +674,17 @@ class TestIterator:
   285
   ```
 
-  ​
+  #### 9.7.2 递归生成器
+
+```python
+>>> def flatten(nested):
+	try:
+		for sublist in nested:
+			for element in flatten(sublist):
+				yield element
+    except TypeError:
+		yield nested
+>>> list(flatten([[[1], 2], 3, 4, [5, [6, 7]], 8]))
+[1, 2, 3, 4, 5, 6, 7, 8]
+```
+
