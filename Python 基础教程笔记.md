@@ -688,3 +688,39 @@ class TestIterator:
 [1, 2, 3, 4, 5, 6, 7, 8]
 ```
 
+### 10.1 模块
+
+* 模块用来定义函数、类和其他内容。
+
+#### 10.1.1 模块是程序
+
+```python
+#在“G:/PythonLearn”目录下创建 sample.py（打印 Hello, World!） 文件
+>>> import sys
+>>> sys.path.append("G:/PythonLearn")#告诉编译器除了默认目录中寻找外还需要在指定目录下寻找模块
+>>> import sample#会创建新文件以.pyc
+Hello, World!#导入时只执行一次（1.优化，2.防止出错）
+>>> import sample #再导入时不执行
+>>> hello = reload(sample) #重新载入(应尽可能避免)
+Hello, World!
+
+>>> __name__
+'__main__'
+>>> sample.__name__
+'sample'
+```
+
+#### 10.1.3 让你的模块可用
+
+* 将模块放置在正确的位置
+
+```python
+>>> print(sys.path)
+['', 'D:\\Python27\\Lib\\idlelib', 'C:\\Windows\\system32\\python27.zip', 'D:\\Python27\\DLLs', 'D:\\Python27\\lib', 'D:\\Python27\\lib\\plat-win', 'D:\\Python27\\lib\\lib-tk', 'D:\\Python27', 'D:\\Python27\\lib\\site-packages', 'G:/PythonLearn']
+```
+
+"lib\\site-packages"是合适的放置第三方的目录
+
+* 告诉编译器去哪里找
+
+配置PAYTHONPATH环境变量
