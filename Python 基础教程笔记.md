@@ -690,6 +690,8 @@ class TestIterator:
 
 ### 10.1 模块
 
+python中，每个py文件被称之为模块，为了组织模块，每个具有_ _init__.py文件的目录被称为包。只要模块或者包所在的目录在sys.path中，就可以使用import 模块或import 包来使用。
+
 * 模块用来定义函数、类和其他内容。
 
 #### 10.1.1 模块是程序
@@ -712,15 +714,13 @@ Hello, World!
 
 #### 10.1.3 让你的模块可用
 
-* 将模块放置在正确的位置
+1. import sys    sys.path.append("G:/PythonLearn")
+2. 将模块放置在正确的位置（~\"lib\\site-packages）
 
 ```python
 >>> print(sys.path)
 ['', 'D:\\Python27\\Lib\\idlelib', 'C:\\Windows\\system32\\python27.zip', 'D:\\Python27\\DLLs', 'D:\\Python27\\lib', 'D:\\Python27\\lib\\plat-win', 'D:\\Python27\\lib\\lib-tk', 'D:\\Python27', 'D:\\Python27\\lib\\site-packages', 'G:/PythonLearn']
 ```
 
-"lib\\site-packages"是合适的放置第三方的目录
+3. 配置PAYTHONPATH环境变量
 
-* 告诉编译器去哪里找
-
-配置PAYTHONPATH环境变量
