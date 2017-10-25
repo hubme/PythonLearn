@@ -724,3 +724,63 @@ Hello, World!
 
 3. 配置PAYTHONPATH环境变量
 
+
+#### 10.2.1 查看模块
+
+查看模块包含的内容可以使用dir函数。它会将模块的所有函数、类、变量等的所有特性列出。
+
+```python
+>>> import copy
+>>> dir(copy)
+['Error', 'PyStringMap', '_EmptyClass', '__all__', '__builtins__', '__doc__', '__file__', '__name__', '__package__', '_copy_dispatch', '_copy_immutable', '_copy_inst', '_copy_with_constructor', '_copy_with_copy_method', '_deepcopy_atomic', '_deepcopy_dict', '_deepcopy_dispatch', '_deepcopy_inst', '_deepcopy_list', '_deepcopy_method', '_deepcopy_tuple', '_keep_alive', '_reconstruct', '_test', 'copy', 'deepcopy', 'dispatch_table', 'error', 'name', 't', 'weakref']
+>>> [n for n in dir(copy) if not n.startswith("_")]
+['Error', 'PyStringMap', 'copy', 'deepcopy', 'dispatch_table', 'error', 'name', 't', 'weakref']
+>>> copy.__all__
+['Error', 'copy', 'deepcopy']
+```
+
+* _ _all__ = ["Error", "copy", "deepcopy"] 它定义了模块的公有接口。
+
+  from copy import * 那么你只能使用_ _all__变量中的3个函数，避免导入所有不需要用的变量、函数等。如果没有设定 _ _all_ _ _,用import * 默认将会输出模块中所有不以下划线开头的全局名称。
+
+#### 10.2.2 用help获取帮助
+
+```python
+>>> help(copy)
+Help on module copy:
+NAME
+    copy - Generic (shallow and deep) copying operations.
+...
+
+>>> print range.__doc__
+range(stop) -> list of integers
+range(start, stop[, step]) -> list of integers
+...
+
+>>> print copy.__file__
+D:\Python27\lib\copy.pyc
+```
+
+### 10.3 标准库
+
+#### 10.3.1 sys
+
+sys模块能够让你访问与Python解释器联系紧密的变量和函数
+
+#### 10.3.2 os
+
+os模块能够让你访问多个操作系统服务的功能。
+
+#### 10.3.3 fileinput
+
+fileinput模块能够让你轻松遍历文本文件的所有行。
+
+#### 10.3.4 集合、堆和双端队列
+
+#### 10.3.5 time 时间模块
+
+#### 10.3.6 random
+
+#### 10.3.7 shelve 文件存储
+
+#### 10.3.8 re 正则表达式
