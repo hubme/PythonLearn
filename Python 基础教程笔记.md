@@ -1,3 +1,277 @@
+#### 1.4.1 数字和表达式
+
+##### 1.4.1.1 整数
+
+```python
+print "Output #4: {0}".format(9)
+print "Output #5: {0}".format(3**4)
+print "Output #6: {0}".format(int(8.3)/int(2.7))
+
+Output #4: 9
+Output #5: 81
+Output #6: 4
+```
+
+##### 1.4.1.2 浮点数(带有小数点的数)
+
+```python
+print "Output #7: {0:.3f}".format(8.3/2.7)
+print "Output #8: {0:.1f}".format(2.5*4.8)
+print "Output #9: {0:.2f}".format(8/float(3))
+print "Output #10: {0:.4f}".format(8.0/3)
+
+Output #7: 3.074
+Output #8: 12.0
+Output #9: 2.67
+Output #10: 2.6667
+```
+
+##### 1.4.1.3 字符串
+
+```python
+#单引号
+print("Output #14: {0:s}".format('I\'m enjoying learning Python.'))
+#双引号 "\"后有空格会出错
+print("Output #15: {0:s}".format("This is a long string. Without the backslash\
+it would run off of the page on the right in the text editor and be very\
+difficult to read and edit. By using the backslash you can split the long\
+string into smaller strings on separate lines so that the whole string is easy\
+to view in the text editor."))
+#3 个单引号 换行不需要在最后添加"\"
+print("Output #16: {0:s}".format('''You can use triple single quotes
+for multi-line comment strings.'''))
+#3 个双引号
+print("Output #17: {0:s}".format("""You can also use triple double quotes
+for multi-line comment strings."""))
+
+Output #14: I'm enjoying learning Python.
+Output #15: This is a long string. Without the backslashit would run off of the page on the right in the text editor and be verydifficult to read and edit. By using the backslash you can split the longstring
+ into smaller strings on separate lines so that the whole string is easyto view in the text editor.
+Output #16: You can use triple single quotes
+for multi-line comment strings.
+Output #17: You can also use triple double quotes
+for multi-line comment strings.
+```
+
+```python
+string1 = "This is a "
+string2 = "short string."
+sentence = string1 + string2
+print("Output #18: {0:s}".format(sentence))
+print("Output #19: {0:s} {1:s}{2:s}".format("She is", "very "*4, "beautiful."))
+m = len(sentence)
+print("Output #20: {0:d}".format(m))
+
+Output #18: This is a short string.
+Output #19: She is very very very very beautiful.
+Output #20: 23
+```
+
+* split
+
+  ```python
+  string1 = "My deliverable is due in May"
+  string1_list1 = string1.split() #默认使用空格符
+  string1_list2 = string1.split(" ",2) #"2"说明使用前两个空格进行拆分
+  print("Output #21: {0}".format(string1_list1))
+  print("Output #22: FIRST PIECE:{0} SECOND PIECE:{1} THIRD PIECE:{2}"\
+  .format(string1_list2[0], string1_list2[1], string1_list2[2]))
+  string2 = "Your,deliverable,is,due,in,June"
+  string2_list = string2.split(',')
+  print("Output #23: {0}".format(string2_list))
+  print("Output #24: {0} {1} {2}".format(string2_list[1], string2_list[5],\
+  string2_list[-1]))
+  print("Output #25: {0}".format(','.join(string2_list)))
+
+  Output #21: ['My', 'deliverable', 'is', 'due', 'in', 'May']
+  Output #22: FIRST PIECE:My SECOND PIECE:deliverable THIRD PIECE:is due in May
+  Output #23: ['Your', 'deliverable', 'is', 'due', 'in', 'June']
+  Output #24: deliverable June June
+  Output #25: Your,deliverable,is,due,in,June
+  ```
+
+* join
+
+  ```python
+  >>> ','.join('VanceKing')
+  'V,a,n,c,e,K,i,n,g'
+  >>> print ','.join(["Vance", "King"])
+  Vance,King
+  ```
+
+  ​
+
+* strip lstrip rstrip
+
+  ```python
+  string3 = " Remove unwanted characters    from this string.\t\t    \n"
+  print("Output #26: string3: {0:s}".format(string3))
+  string3_lstrip = string3.lstrip()
+  print("Output #27: lstrip: {0:s}".format(string3_lstrip))
+  string3_rstrip = string3.rstrip()
+  print("Output #28: rstrip: {0:s}".format(string3_rstrip))
+  string3_strip = string3.strip()
+  print("Output #29: strip: {0:s}".format(string3_strip))
+
+  Output #26: string3:  Remove unwanted characters    from this string.
+  Output #27: lstrip: Remove unwanted characters    from this string.
+  Output #28: rstrip:  Remove unwanted characters    from this string.
+  Output #29: strip: Remove unwanted characters    from this string.
+
+
+  string4 = "$$Here's another string that has unwanted characters.__---++"
+  print("Output #30: {0:s}".format(string4))
+  string4 = "$$The unwanted characters have been removed.__---++"
+  string4_strip = string4.strip('$_-+')
+  print("Output #31: {0:s}".format(string4_strip))
+
+  Output #30: $$Here's another string that has unwanted characters.__---++
+  Output #31: The unwanted characters have been removed.
+  ```
+
+  ​
+
+* replace
+
+  ```python
+  string5 = "Let's replace the spaces in this sentence with other characters."
+  string5_replace = string5.replace(" ", "!@!")
+  print("Output #32 (with !@!): {0:s}".format(string5_replace))
+  string5_replace = string5.replace(" ", ",")
+  print("Output #33 (with commas): {0:s}".format(string5_replace))
+
+  Output #32 (with !@!): Let's!@!replace!@!the!@!spaces!@!in!@!this!@!sentence!@!with!@!other!@!characters.
+  Output #33 (with commas): Let's,replace,the,spaces,in,this,sentence,with,other,characters.
+  ```
+
+  ​
+
+* lower、upper、capitalize
+
+  `lower` 和 `upper` 函数分别用来将字符串中的字母转换为小写和大写。`capitalize` 函数对字符串中的第一个字母应用 `upper` 函数，对其余的字母应用 `lower` 函数.
+
+  ```python
+  string6 = "Here's WHAT Happens WHEN You Use lower."
+  print("Output #34: {0:s}".format(string6.lower()))
+  string7 = "Here's what Happens when You Use UPPER."
+  print("Output #35: {0:s}".format(string7.upper()))
+  string5 = "here's WHAT Happens WHEN you use Capitalize."
+  print("Output #36: {0:s}".format(string5.capitalize()))
+  string5_list = string5.split()
+  print("Output #37 (on each word):")
+  for word in string5_list:
+      print("{0:s}".format(word.capitalize()))
+      
+  Output #34: here's what happens when you use lower.
+  Output #35: HERE'S WHAT HAPPENS WHEN YOU USE UPPER.
+  Output #36: Here's what happens when you use capitalize.
+  Output #37 (on each word):
+  Here's
+  What
+  Happens
+  When
+  You
+  Use
+  Capitalize.
+  ```
+
+  ​
+
+#### 1.4.2 正则表达式与模式匹配
+
+```python
+import re
+
+string = "The quick brown fox jumps over the lazy dog."
+string_list = string.split()
+pattern = re.compile(r"The", re.I)
+count = 0
+for word in string_list:
+    if pattern.search(word):
+        count += 1
+print("Output #38: {0:d}".format(count))
+
+Output #38: 2
+```
+
+第一行将字符串变量 `string` 赋值为 `The quick brown fox jumps over the lazy dog.`。下一行将字符串拆分列表，列表中的每个元素都是一个单词。
+
+再下一行使用 `re.compile` 和 `re.I` 函数以及用 `r` 表示的原始字符串，创建一个名为 `pattern` 的正则表达式。`re.compile` 函数将文本形式的模式编译成为编译后的正则表达式。正则表达式不是必须编译的，但是编译是个好习惯，因为这样可以显著地提高程序运行速度。`re.I` 函数确保模式是不区分大小写的，能同时在字符串中匹配“The”和“the”。原始字符串标志 `r` 可以确保 Python 不处理字符串中的转义字符，比如 `\`、`\t` 或 `\n`。这样在进行模式匹配时，字符串中的转义字符和正则表达式中的元字符就不会有意外的冲突。在上面的例子中，字符串中没有转义字符，所以 `r` 不是必需的，但是在正则表达式中使用原始字符串标志是一个好习惯。接下来的一行代码创建了一个变量 `count` 来保存字符串中模式出现的次数，初始值设为 `0`。
+
+再下一行是个 `for` 循环语句，在列表变量 `string_list` 的各个元素之间进行迭代。它取出的第一个元素是“The”这个单词，取出的第二个元素是“quick”这个单词，以此类推，直到取出列表中所有的单词。接下来的一行使用 `re.search` 函数将列表中的每个单词与正则表达式进行比较。如果这个单词与正则表达式相匹配，函数就返回 `True`，否则就返回 `None` 或 `False`。所以 `if` 语句的意义就是：如果单词与正则表达式匹配，那么 `count` 的值就加 1。
+
+最后，`print` 语句打印出正则表达式在字符串中找到模式“The”（不区分大小写）的次数，在本例中，找到了两次。
+
+
+
+
+
+
+
+
+
+
+
+##### 1.4.1.3 type 函数
+
+```python
+>>> print type.__doc__
+type(object) -> the object's type
+type(name, bases, dict) -> a new type
+
+>>> type(1)
+<type 'int'>
+>>> type('1')
+<type 'str'>
+>>> type(2.0)
+<type 'float'>
+>>> type((1, 2))
+<type 'tuple'>
+>>> type([1, 2])
+<type 'list'>
+
+from math import exp, log, sqrt
+print("Output #11: {0:.4f}".format(exp(3))) #e 的乘方
+print("Output #12: {0:.2f}".format(log(4))) #自然对数
+print("Output #13: {0:.1f}".format(sqrt(81))) #平方根
+
+Output #11: 20.0855
+Output #12: 1.39
+Output #13: 9.0
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #### 5.4.6 更复杂的条件
 
 > 1、比较运算符
@@ -666,7 +940,7 @@ class TestIterator:
 * 生成器（并不会立刻进入循环）
 
   ```python
-  >>> g = ((i+2)**2 for i in range(2, 27))
+  >>> g = ((i+2)**2 for i in range(2, 27)) #"**"次方。2**3 = 8
   >>> g.next()
   16
 
@@ -784,3 +1058,83 @@ fileinput模块能够让你轻松遍历文本文件的所有行。
 #### 10.3.7 shelve 文件存储
 
 #### 10.3.8 re 正则表达式
+
+### 11.1 打开文件
+
+```python
+>>> f = open(r"E:\Python\PythonLearn\test\somefile.txt")
+```
+
+#### 11.1.1 文件模式
+
+* r 读模式
+* w 写模式
+* a 追加模式
+* b 二进制模式（可添加到其它模式中使用）
+* 读/写模式（可添加到其它模式中使用）
+
+#### 11.1.2 缓冲
+
+参数：
+
+* 0/False 无缓冲
+* 1/True 有缓冲，使用内存代替硬盘，使用flush/close更新硬盘
+* 大于1代表缓存区大小(byte)
+* -1（任何负数）代表使用默认的缓冲区大小
+
+#### 11.2.1 文件读写
+
+```python
+>>> f = open("aaaHa.txt", 'w') #文件保存在安装目录
+>>> f.write('Hello, ')
+>>> f.write('world')
+>>> f.close()
+
+>>> f = open('aaaHa.txt', 'r')
+>>> f.read(4)
+'Hell'
+>>> f.read()
+'o, world'
+>>> f.read()
+''
+
+>>> f = open(r'E:\Python\PythonLearn\test\somefile.txt', 'w')
+>>> f.write('0123456789')
+>>> f.seek(5)
+>>> f.write('hello, world')
+>>> f.close()
+>>> f1 = open(r'E:\Python\PythonLearn\test\somefile.txt')
+>>> f1.read()
+'01234hello, world'
+```
+
+* with 语句 
+
+  form __ future __ import with_statement
+
+  with open('somefile.txt') as somefile:
+
+  ​	do_something(somefile)
+
+  >  with 语句可以打开文件并且将其赋值到变量上。之后就可以将数据写入语句体重的文件（或执行其它操作）。文件在语句结束后会被自动关闭，即使是由于异常引起的结束也是如此。
+  >
+  > 更多参考“上下文管理器”
+
+#### 11.3.4 使用 fileinput 实现懒惰行迭代
+
+```python
+import fileinput
+for line in fileinput.input(filename):
+  ...
+```
+
+#### 11.3.5 文件迭代器
+
+```python
+f = open(filename)
+for line in f:
+  ...
+f.close()
+```
+
+### GUI 
