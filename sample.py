@@ -1,9 +1,12 @@
-import re
+from datetime import date, time, datetime, timedelta
 
-string = "The quick brown fox jumps over the lazy dog."
-string_list = string.split()
-pattern = re.compile(r"(?P<match_word>The)", re.I)
-print("Output #39:")
-for word in string_list:
-    if pattern.search(word):
-        print "{:s}".format(pattern.search(word).group('match_word'))
+today = date.today()
+date1 = today.strftime('%m/%d/%Y')
+date2 = today.strftime('%b %d, %Y')
+date3 = today.strftime('%Y-%m-%d')
+date4 = today.strftime('%B %d, %Y')
+
+print("Output #54: {!s}".format(datetime.strptime(date1, '%m/%d/%Y')))
+print("Output #55: {!s}".format(datetime.strptime(date2, '%b %d, %Y')))
+print("Output #56: {!s}".format(datetime.date(datetime.strptime(date3, '%Y-%m-%d'))))
+print("Output #57: {!s}".format(datetime.date(datetime.strptime(date4, '%B %d, %Y'))))

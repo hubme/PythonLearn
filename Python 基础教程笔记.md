@@ -246,10 +246,6 @@ print("Output #40: {:s}".format(pattern.sub("a", string)
 
 最后一个新代码片段在最后一行。这个代码片段使用 `re.sub` 函数以不区分大小写的方式在变量 `string`中寻找模式，然后将发现的每个模式替换成字母 `a`。这次替换的最终结果是 `a quick brown fox jumps over a lazy dog.`。
 
-
-
-
-
 ##### 1.4.1.3 type 函数
 
 ```python
@@ -278,7 +274,73 @@ Output #12: 1.39
 Output #13: 9.0
 ```
 
+#### 1.4.4 日期
 
+```python
+# !s 表示传入到 print 语句中的值应该格式化为字符串
+today = date.today() # 创建date对象，但不包含时、分、秒
+print("Output #41: today: {0!s}".format(today)) 
+print("Output #42: {0!s}".format(today.year))
+print("Output #43: {0!s}".format(today.month))
+print("Output #44: {0!s}".format(today.day))
+current_datetime = datetime.today()
+print("Output #45: {0!s}".format(current_datetime))
+
+Output #41: today: 2017-10-26
+Output #42: 2017
+Output #43: 10
+Output #44: 26
+Output #45: 2017-10-26 22:42:57.485000
+```
+
+```python
+# 使用timedelta计算一个新日期
+today = date.today()
+one_day = timedelta(days=-1)
+yesterday = today + one_day
+print("Output #46: yesterday: {0!s}".format(yesterday))
+eight_hours = timedelta(hours=-8)
+print("Output #47: {0!s} {1!s}".format(eight_hours.days, eight_hours.seconds))
+
+Output #46: yesterday: 2017-10-25
+Output #47: -1 57600
+```
+
+```python
+# 根据一个日期对象创建具有特定格式的字符串
+today = date.today()
+print("Output #50: {:s}".format(today.strftime('%m/%d/%Y')))
+print("Output #51: {:s}".format(today.strftime('%b %d, %Y')))
+print("Output #52: {:s}".format(today.strftime('%Y-%m-%d')))
+print("Output #53: {:s}".format(today.strftime('%B %d, %Y')))
+
+Output #50: 10/26/2017
+Output #51: Oct 26, 2017
+Output #52: 2017-10-26
+Output #53: October 26, 2017
+```
+
+```python
+#使用 strptime 函数根据具有特定形式的日期字符串来创建 datetime 对象
+today = date.today()
+date1 = today.strftime('%m/%d/%Y')
+date2 = today.strftime('%b %d, %Y')
+date3 = today.strftime('%Y-%m-%d')
+date4 = today.strftime('%B %d, %Y')
+
+# 基于4个具有不同日期格式的字符串
+# 创建2个datetime对象和2个date对象
+print("Output #54: {!s}".format(datetime.strptime(date1, '%m/%d/%Y')))
+print("Output #55: {!s}".format(datetime.strptime(date2, '%b %d, %Y')))
+# 仅显示日期部分
+print("Output #56: {!s}".format(datetime.date(datetime.strptime(date3, '%Y-%m-%d'))))
+print("Output #57: {!s}".format(datetime.date(datetime.strptime(date4, '%B %d, %Y'))))
+
+Output #54: 2017-10-26 00:00:00
+Output #55: 2017-10-26 00:00:00
+Output #56: 2017-10-26
+Output #57: 2017-10-26
+```
 
 
 
