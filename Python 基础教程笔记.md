@@ -118,18 +118,19 @@ Output #20: 23
   Output #28: rstrip:  Remove unwanted characters    from this string.
   Output #29: strip: Remove unwanted characters    from this string.
 
-
-  string4 = "$$Here's another string that has unwanted characters.__---++"
-  print("Output #30: {0:s}".format(string4))
+   string4 = "$$Here's another string that has unwanted characters.__---++"
+   print("Output #30: {0:s}".format(string4))
   string4 = "$$The unwanted characters have been removed.__---++"
-  string4_strip = string4.strip('$_-+')
+  string4strip = string4.strip('$-+')
   print("Output #31: {0:s}".format(string4_strip))
-
+    
   Output #30: $$Here's another string that has unwanted characters.__---++
   Output #31: The unwanted characters have been removed.
+
   ```
 
-  ​
+
+ 
 
 * replace
 
@@ -145,6 +146,7 @@ Output #20: 23
   ```
 
   ​
+
 
 * lower、upper、capitalize
 
@@ -179,9 +181,11 @@ Output #20: 23
 
 #### 1.4.2 正则表达式与模式匹配
 
-```python
-import re
+**sample 1:**
 
+```python
+# 计算字符串中模式出现的次数
+import re
 string = "The quick brown fox jumps over the lazy dog."
 string_list = string.split()
 pattern = re.compile(r"The", re.I)
@@ -202,11 +206,45 @@ Output #38: 2
 
 最后，`print` 语句打印出正则表达式在字符串中找到模式“The”（不区分大小写）的次数，在本例中，找到了两次。
 
+**sample 2:**
 
+```python
+# 在字符串中每次找到模式时将其打印出来
+import re
+string = "The quick brown fox jumps over the lazy dog."
+string_list = string.split()
+pattern = re.compile(r"(?P<match_word>The)", re.I)
+print("Output #39:")
+for word in string_list:
+    if pattern.search(word):
+        print "{:s}".format(pattern.search(word).group('match_word'))
+        
+Output #39:
+The
+the
+```
 
+第二个示例与第一个示例的区别在于，这个示例是想在屏幕上打印出每个匹配的字符串，而不是匹配的次数。要想得到匹配的字符串，将它们打印到屏幕上或存储在文件中，需要使用 `(?P<*name*>)` 元字符和 `group` 函数。这个示例中的多数代码和前一个示例中讨论过的代码是一样的，所以这里重点解释新的部分。
 
+第一个新代码片段是 `(?P<*name*>)`，这是一个出现在 `re.compile` 函数中的元字符。这个元字符使匹配的字符串可以在后面的程序中通过组名符号 `<*name*>` 来引用。在这个示例中，这个组被称为 `<match_word>`。
 
+最后一个新代码片段出现在 `if` 语句中。这个代码片段的意义是：“如果结果为 `True`（也就是说，如果单词与模式匹配），那么就在 `search` 函数返回的数据结构中找出 `match_word` 组中的值，并把这些值打印在屏幕上。”
 
+**sample 3:**
+
+```python
+# 使用字母“a”替换字符串中的单词“the”
+string = "The quick brown fox jumps over the lazy dog."
+string_to_find = r"The"
+pattern = re.compile(string_to_find, re.I)
+print("Output #40: {:s}".format(pattern.sub("a", string)
+```
+
+最后一个示例展示了如何使用 `re.sub` 函数来在文本中用一种模式替换另一种模式。再说一遍，这个示例中的多数代码和前两个示例中讨论过的代码是一样的，所以这里重点解释新的部分。
+
+第一个新代码片段将正则表达式赋给变量 `pattern`，于是这个变量可以被传入到 `re.compile` 函数中。解释一下，在调用 `re.compile` 函数之前，将正则表达式赋给变量不是必需的；但是，如果你的正则表达式特别长而且复杂的话，将它赋给一个变量然后将变量传给 `re.compile` 函数这种做法可以使你的代码更利于理解。
+
+最后一个新代码片段在最后一行。这个代码片段使用 `re.sub` 函数以不区分大小写的方式在变量 `string`中寻找模式，然后将发现的每个模式替换成字母 `a`。这次替换的最终结果是 `a quick brown fox jumps over a lazy dog.`。
 
 
 
@@ -1118,7 +1156,7 @@ fileinput模块能够让你轻松遍历文本文件的所有行。
 
   >  with 语句可以打开文件并且将其赋值到变量上。之后就可以将数据写入语句体重的文件（或执行其它操作）。文件在语句结束后会被自动关闭，即使是由于异常引起的结束也是如此。
   >
-  > 更多参考“上下文管理器”
+  >  更多参考“上下文管理器”
 
 #### 11.3.4 使用 fileinput 实现懒惰行迭代
 
