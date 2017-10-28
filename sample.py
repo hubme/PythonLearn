@@ -1,12 +1,6 @@
-from datetime import date, time, datetime, timedelta
-
-today = date.today()
-date1 = today.strftime('%m/%d/%Y')
-date2 = today.strftime('%b %d, %Y')
-date3 = today.strftime('%Y-%m-%d')
-date4 = today.strftime('%B %d, %Y')
-
-print("Output #54: {!s}".format(datetime.strptime(date1, '%m/%d/%Y')))
-print("Output #55: {!s}".format(datetime.strptime(date2, '%b %d, %Y')))
-print("Output #56: {!s}".format(datetime.date(datetime.strptime(date3, '%Y-%m-%d'))))
-print("Output #57: {!s}".format(datetime.date(datetime.strptime(date4, '%B %d, %Y'))))
+a_list = [1, 2, 3]
+another_list = ['printer', 5, ['star', 'circle', 9]]
+print("Output #73: {}".format(a_list[0:2]))
+print("Output #74: {}".format(another_list[:2]))
+print("Output #75: {}".format(a_list[1:3]))
+print("Output #76: {}".format(another_list[1:]))

@@ -342,15 +342,55 @@ Output #56: 2017-10-26
 Output #57: 2017-10-26
 ```
 
+### 1.4.5  列表
 
+#### 1.4.5.1 创建列表
 
+```python
+# 使用方括号创建一个列表
+# 用len()计算列表中元素的数量
+# 用max()和min()找出最大值和最小值
+# 用count()计算出列表中某个值出现的次数
 
+a_list = [1, 2, 3]
+print("Output #58: {}".format(a_list))
+print("Output #59: a_list has {} elements.".format(len(a_list)))
+print("Output #60: the maximum value in a_list is {}.".format(max(a_list)))
+print("Output #61: the minimum value in a_list is {}.".format(min(a_list)))
+another_list = ['printer', 5, ['star', 'circle', 9]]
+print("Output #62: {}".format(another_list))
+print("Output #63: another_list also has {} elements.".format\
+(len(another_list)))
+print("Output #64: 5 is in another_list {} time.".format(another_list.count(5)))
+```
 
+#### 1.4.5.2 索引值
 
+```python
+# 使用索引值访问列表中的特定元素
+# [0]是第1个元素，[-1]是最后一个元素
+>>> a_list = [1, 2, 3]
+>>> a_list[0]
+1
+>>> a_list[-1]
+3
+```
 
+#### 1.4.5.3 列表切片
 
+```python
+a_list = [1, 2, 3]
+another_list = ['printer', 5, ['star', 'circle', 9]]
+print("Output #73: {}".format(a_list[0:2]))
+print("Output #74: {}".format(another_list[:2]))
+print("Output #75: {}".format(a_list[1:3]))
+print("Output #76: {}".format(another_list[1:]))
 
-
+Output #73: [1, 2]
+Output #74: ['printer', 5]
+Output #75: [2, 3]
+Output #76: [5, ['star', 'circle', 9]]
+```
 
 
 
