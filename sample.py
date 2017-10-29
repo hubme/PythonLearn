@@ -1,6 +1,5 @@
-a_list = [1, 2, 3]
-another_list = ['printer', 5, ['star', 'circle', 9]]
-print("Output #73: {}".format(a_list[0:2]))
-print("Output #74: {}".format(another_list[:2]))
-print("Output #75: {}".format(a_list[1:3]))
-print("Output #76: {}".format(another_list[1:]))
+my_data = [(1,2,3), (4,5,6), (7,8,9), (7,8,9)]
+set_of_tuples1 = {x for x in my_data}
+print("Output #131 (set comprehension): {}".format(set_of_tuples1))
+set_of_tuples2 = set(my_data)
+print("Output #132 (set function): {}".format(set_of_tuples2))

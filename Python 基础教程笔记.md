@@ -392,21 +392,142 @@ Output #75: [2, 3]
 Output #76: [5, ['star', 'circle', 9]]
 ```
 
+#### 1.4.5.4 列表复制
 
+```python
+a_list = [1, 2, 3]
+new_list = a_list[:] #深复制
+print("Output #77: {}".format(new_list))
 
+Output #77: [1, 2, 3]
+```
 
+#### 1.4.5.5 列表连接
 
+```python
+a_list = [1, 2, 3]
+b_list = ["A", "B"]
+print a_list + b_list
 
+[1, 2, 3, 'A', 'B']
+```
 
+#### 1.4.5.6 列表检查 
 
+* in
+* not in
 
+#### 1.4.5.7 追加、删除和弹出元素
 
+* append() 向列表末尾追加一个新元素
+* remove() 从列表中删除一个特定元素
+* pop() 从列表末尾删除一个元素
 
+#### 1.4.5.8 列表反转
 
+```python
+# 要想反转列表同时又不修改原列表，可以先复制列表
+a_list = [1, 2, 3]
+a_list.reverse()
+print a_list
 
+>>> [3, 2, 1]
+```
 
+#### 1.4.5.9 列表排序
 
+```python
+unordered_list = [3, 5, 1, 7, 2, 8]
+print unordered_list
+list_copy = unordered_list[:]
+list_copy.sort()
+print list_copy
+print unordered_list
 
+output:
+[3, 5, 1, 7, 2, 8]
+[1, 2, 3, 5, 7, 8]
+[3, 5, 1, 7, 2, 8]
+```
+
+#### 1.4.5.10 排序函数
+
+* sorted
+* operator 
+
+### 1.4.6  元组
+
+```python
+#解包
+my_tuple = ('one', 'two', 'three')
+a, b, c = my_tuple
+print "{0}, {1}, {2}".format(a, b, c)
+
+one, two, three
+```
+
+#### 1.4.6.3 元组合列表相互转换
+
+```python
+my_list = [1, 2, 3]
+my_tuple = ('x', 'y', 'z')
+print tuple(my_list)
+print list(my_tuple)
+
+(1, 2, 3)
+['x', 'y', 'z']
+```
+
+### 1.4.7 字典
+
+#### 1.4.7.1 创建字典
+
+```python
+#创建字典
+empty_dict = {}
+a_dict = {'one':1, 'two':2, 'three':3}
+print a_dict
+
+{'three': 3, 'two': 2, 'one': 1}
+```
+
+* for 循环
+
+```
+y = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', \
+'Nov', 'Dec']
+z = ['Annie', 'Betty', 'Claire', 'Daphne', 'Ellie', 'Franchesca', 'Greta', \
+'Holly', 'Isabel', 'Jenny']
+　
+print("Output #126:")
+for month in y:
+     print("{!s}".format(month))
+　
+print("Output #127: (index value: name in list)")
+for i in range(len(z)):
+     print("{0!s}: {1:s}".format(i, z[i]))
+　
+print("Output #128: (access elements in y with z's index values)")
+for j in range(len(z)):
+     if y[j].startswith('J'):
+         print("{!s}".format(y[j]))
+　
+print("Output #129:")
+for key, value in another_dict.items():
+     print("{0:s}, {1}".format(key, value))
+```
+
+#### 1.4.7.4 简化for循环：列表、集合与字典生成式
+
+列表、集合与字典**生成式**是 Python 中一种简化的 `for` 循环写法。列表生成式出现在方括号内，集合生成式与字典生成式则出现在花括号内。所有的生成式都包括条件逻辑（例如：`if-else` 语句）。
+
+* 列表生成式
+
+```python
+my_data = [[1,2,3], [4,5,6], [7,8,9]]
+rows_to_keep = [row for row in my_data if row[2] > 5]
+print("Output #130 (list comprehension): {}".format(rows_to_keep))
+```
 
 
 
