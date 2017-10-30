@@ -489,6 +489,9 @@ a_dict = {'one':1, 'two':2, 'three':3}
 print a_dict
 
 {'three': 3, 'two': 2, 'one': 1}
+
+#复制 创建新的副本
+a_new_dict = a_dict.copy()
 ```
 
 * for 循环
@@ -519,7 +522,7 @@ for key, value in another_dict.items():
 
 #### 1.4.7.4 简化for循环：列表、集合与字典生成式
 
-列表、集合与字典**生成式**是 Python 中一种简化的 `for` 循环写法。列表生成式出现在方括号内，集合生成式与字典生成式则出现在花括号内。所有的生成式都包括条件逻辑（例如：`if-else` 语句）。
+**列表、集合与字典生成式是 Python 中一种简化的 `for` 循环写法**。列表生成式出现在方括号内，集合生成式与字典生成式则出现在花括号内。所有的生成式都包括条件逻辑（例如：`if-else` 语句）。
 
 * 列表生成式
 
@@ -527,6 +530,44 @@ for key, value in another_dict.items():
 my_data = [[1,2,3], [4,5,6], [7,8,9]]
 rows_to_keep = [row for row in my_data if row[2] > 5]
 print("Output #130 (list comprehension): {}".format(rows_to_keep))
+```
+
+对于 `my_data` 中的每一行，如果这行中索引位置 2 的值（即第三个值）大于 5，则保留这一行。因为 6 和 9 都大于 5，所以 `rows_to_keep` 中的列表子集为 `[4, 5, 6]` 和 `[7, 8, 9]`。
+
+### 1.4.8 异常
+
+* try-except
+
+```python
+def getMean(numericValues):
+    return sum(numericValues)/len(numericValues)
+
+my_list = []
+try:
+    print("Output #138: {}".format(getMean(my_list)))
+except ZeroDivisionError as detail:
+    print("Output #138 (Error): {}".format(float('nan')))
+    print("Output #138 (Error): {}".format(detail))
+    
+Output #138 (Error): nan
+Output #138 (Error): integer division or modulo by zero
+```
+
+* try-except-else-finally
+
+```python
+try:
+    result = getMean(my_list2)
+except ZeroDivisionError as detail:
+    print "Output #142 (Error): " + str(float('nan'))
+    print "Output #142 (Error):", detail
+else:
+    print "Output #142 (The mean is):", result
+finally:
+    print "Output #142 (Finally): The finally block is executed every time"
+    
+Output #142 (The mean is): 2
+Output #142 (Finally): The finally block is executed every time
 ```
 
 
