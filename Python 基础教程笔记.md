@@ -1408,6 +1408,20 @@ fileinput模块能够让你轻松遍历文本文件的所有行。
 >>> f1 = open(r'E:\Python\PythonLearn\test\somefile.txt')
 >>> f1.read()
 '01234hello, world'
+
+import sys
+
+my_letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
+max_index = len(my_letters)
+output_file = sys.argv[1]
+filewriter = open(output_file, 'w')
+for index_value in range(len(my_letters)):
+    if index_value < (max_index-1):
+        filewriter.write(my_letters[index_value]+'\t')
+    else:
+        filewriter.write(my_letters[index_value]+'\n')
+filewriter.close()
+print "Output #146: Output written to file"
 ```
 
 * with 语句 
@@ -1421,6 +1435,29 @@ fileinput模块能够让你轻松遍历文本文件的所有行。
   >  with 语句可以打开文件并且将其赋值到变量上。之后就可以将数据写入语句体重的文件（或执行其它操作）。文件在语句结束后会被自动关闭，即使是由于异常引起的结束也是如此。
   >
   >  更多参考“上下文管理器”
+
+  * glob
+
+  使用glob读取多个文本文件
+
+  ```python
+  import sys, glob, os
+
+  print("Output #145:")
+  inputPath = sys.argv[1]
+  for input_file in glob.glob(os.path.join(inputPath,'*.txt')):
+      with open(input_file, 'r') as filereader:
+          for row in filereader:
+              print("{}".format(row.strip()))
+              
+  >>> python sample.py "G:\Python\PythonLearn\test"
+  ```
+
+  第四行代码是 `for` 循环，使用 `os.path.join` 函数和 `glob.glob` 函数来找出符合特定模式的某个文件夹下面的所有文件。指向这个文件夹的路径包含在变量 `inputpath` 中，这个变量将在命令行中被提供。`os.path.join` 函数将这个文件夹路径和这个文件夹中所有符合特定模式的文件名连接起来，这种特定模式可以由 `glob.glob` 函数扩展。这个示例使用的是模式 `*.txt` 来匹配由 .txt 结尾的所有文件名。因为这是一个 `for` 循环，所以这行中其余的代码你应该很熟悉了。`input_file` 是一个占位符，表示由 `glob.glob` 函数生成的列表中的每个文件。这行代码的意义就是：对于匹配文件列表中的每个文件，做下面的操作……
+
+  余下的代码和读取单个文件的代码非常相似。以只读方式打开 `input_file` 变量，然后创建一个 `filereader` 对象。对于 `filereader` 对象中的每一行，除去行两端的空格、制表符和换行符，然后打印这一行。
+
+
 
 #### 11.3.4 使用 fileinput 实现懒惰行迭代
 
