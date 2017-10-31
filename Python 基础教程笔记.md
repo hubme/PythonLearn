@@ -1,3 +1,24 @@
+#### 1.4.0 lambda函数
+
+Python允许你定义一种单行的小函数。定义lambda函数的形式如下：
+
+labmda 参数：表达式
+
+lambda函数默认返回表达式的值。你也可以将其赋值给一个变量。lambda函数可以接受任意个参数，包括可选参数，但是表达式只有一个：
+
+```python
+>>> x= lambda x, y: x*y
+>>> x(3, 4)
+12
+>>> g = lambda x, y=0, z=0: x+y+z
+>>> g(1)
+1
+>>> g(1, 2, 3)
+6
+>>> (lambda x, y=0, z=0: x+y+z)(3, 4, 5)
+12
+```
+
 #### 1.4.1 数字和表达式
 
 ##### 1.4.1.1 整数
@@ -27,6 +48,19 @@ Output #10: 2.6667
 ```
 
 ##### 1.4.1.3 字符串
+
+```python
+import string
+
+>>> string.uppercase
+'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+>>> string.lowercase
+'abcdefghijklmnopqrstuvwxyz'
+>>> string.digits
+'0123456789'
+```
+
+
 
 ```python
 #单引号
@@ -274,6 +308,17 @@ Output #12: 1.39
 Output #13: 9.0
 ```
 
+##### 1.4.1.3 id函数
+
+ 返回值的唯一整数，表示值或变量的唯一标识符。每个值或变量都有一个唯一id，id值与变量或值在内存中的位置相关。变量的id也就是它所指向值的id。
+
+```python
+>>> id(123)
+30862528L
+>>> id("123")
+48008968L
+```
+
 #### 1.4.4 日期
 
 ```python
@@ -345,6 +390,29 @@ Output #57: 2017-10-26
 ### 1.4.5  列表
 
 #### 1.4.5.1 创建列表
+
+```python
+#快速创建连续整数的列表
+>>> range(1, 5)
+[1, 2, 3, 4]
+#创建步长为2的列表
+>>> range(1, 10, 2)
+[1, 3, 5, 7, 9]
+
+>>> list = [0, [1, 2], [3, 4, 5]] #列表嵌套
+>>> list[1][0] #可以当做二维数组
+1
+
+>>> names = ["Vance", "King"]
+>>> string.join(names)
+'Vance King'
+>>> string.join(names, "_")
+'Vance_King'
+>>> [name + "s" for name in names] #在每个item后加上"s"
+['Vances', 'Kings']
+>>> [name + "s" for name in names if name != "King"] #加上条件判断
+['Vances']
+```
 
 ```python
 # 使用方括号创建一个列表
@@ -455,7 +523,51 @@ output:
 * sorted
 * operator 
 
+列表的元素还可以是变量。但是修改变量的值，并不影响列表中元素的值。
+
+```python
+>>> a = 1
+>>> b = 2
+>>> num = [a, b, 3]
+>>> num
+[1, 2, 3]
+>>> a = b = 9
+>>> num
+[1, 2, 3]
+```
+
+
+
 ### 1.4.6  元组
+
+```python
+>>> t1 = ("a")
+>>> type(t1)
+<type 'str'>
+>>> t2 = ("a",) #创建包含一个元素的元组，最后要加上","
+>>> type(t2)
+<type 'tuple'>
+>>> t3 = ("a","b")
+>>> type(t3)
+<type 'tuple'>
+
+>>> a = 1
+>>> b = 2
+>>> c = 3
+>>> print a, b, c
+1 2 3
+>>> a, b, c = c, b, a
+>>> print a, b, c
+3 2 1
+
+>>> x = 2
+>>> y = 3
+>>> x, y = x +y, x * y
+>>> x, y
+(5, 6)
+```
+
+
 
 ```python
 #解包
@@ -570,7 +682,51 @@ Output #142 (The mean is): 2
 Output #142 (Finally): The finally block is executed every time
 ```
 
+### 1.4.8 逻辑操作符
 
+* and
+
+在python中空字符串为假，非空字符串为真。非零的数为真。
+
+只要左边的表达式为真，整个表达式返回的值是右边表达式的值。否则，返回左边表达式的值。
+
+```python
+>>> 9 and "OK"
+'OK'
+>>> "ok" and 9
+9
+>>> "ok" and "yes"
+'yes'
+>>> "" and 9
+''
+>>> "" and "ok"
+''
+>>> 0 and "ok"
+0
+>>> "" and 0
+''
+```
+
+* or
+
+or操作符的规则是：只要两边的表达式都为真，整个表达式的结果是左边表达式的值；如果是一真一假，返回真值表达式的值。特别注意的是空值和0的情况，这时候返回的是右边的0或空值：
+
+```python
+>>> 1 or "ok"
+1
+>>> "ok" or 1
+'ok'
+
+>>> "ok" or 0
+'ok'
+>>> 0 or "ok"
+'ok'
+
+>>> "" or 0
+0
+>>> 0 or ""
+''
+```
 
 
 
@@ -1423,6 +1579,11 @@ for index_value in range(len(my_letters)):
 filewriter.close()
 print "Output #146: Output written to file"
 ```
+
+* pickle 模块
+
+  用它提供的方法把各种类型的数据存入文件，数据结构的信息也同样被保存了。
+
 
 * with 语句 
 

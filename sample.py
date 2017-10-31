@@ -1,13 +1,7 @@
-import sys
-
-my_numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-max_index = len(my_numbers)
-output_file = sys.argv[1]
-filewriter = open(output_file, 'a')
-for index_value in range(len(my_numbers)):
-    if index_value < (max_index-1):
-        filewriter.write(str(my_numbers[index_value])+',')
-    else:
-        filewriter.write(str(my_numbers[index_value])+'\n')
-filewriter.close()
-print "Output #147: Output appended to file"
+import pickle
+f = open(r"E:\Python\PythonLearn\test\output_file.txt", "w");
+pickle.dump(100, f)
+pickle.dump(123.38, f)
+pickle.dump((1, 3, "abc")), f)
+pickle.dump([4, 5, 6], f)
+f.close()
