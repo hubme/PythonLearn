@@ -1,6 +1,11 @@
-import sys
-sys.path.append("E:\Python\PythonLearn\mymodule")
+#!/usr/bin/python
+#vim: set fileencoding:utf-8
 
-from divide import divide
+def add_end(L=[]):
+    L.append('END')
+    return L
 
-divide(4, 2)
+print add_end([1, 2])
+print add_end(["x", 7])
+print add_end()
+print add_end()
