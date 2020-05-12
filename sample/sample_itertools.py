@@ -11,6 +11,7 @@ for n in natuals:
         break
 print("\n")
 
+# 循环遍历字符 "A" "B" "C"
 cs = itertools.cycle('ABC')
 t = 10
 for c in cs:
@@ -20,6 +21,7 @@ for c in cs:
         break
 print("\n")
 
+# 字符串 Vance 重复 6 次
 myRepeat = itertools.repeat("Vance", 6)
 for i in myRepeat:
     print(i)
