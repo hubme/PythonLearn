@@ -34,10 +34,10 @@ def test1():
     # sheet 标题的背景色
     ws.sheet_properties.tabColor = "FF0000"
 
-    print('\n ==============输出工作簿名称================\n')
+    print('\n ==============输出工作表名称================\n')
     print(wb.sheetnames)
     for sheet in wb:
-        print(sheet.title)
+        print(sheet.title, sheet.max_row, sheet.max_column)
     
     # Data can be assigned directly to cells
     ws['A1'] = 42
