@@ -5,6 +5,7 @@ from os import path, sep
 from io import StringIO, BytesIO
 from lxml import etree
 from pprint import pprint
+import sys
 
 def read_xml():
     """
@@ -61,18 +62,17 @@ def write_xml():
     result = etree.tostring(root, pretty_print=True, xml_declaration=True, encoding='utf-8').decode('utf-8')
     print(result)
     
-def aaa():
-    with etree.xmlfile('somefile.xml', encoding='utf-8', close=True) as xf:
+def test_xmlfile():
+    with etree.xmlfile('somefile.xml', encoding='utf-8', close=True, compression=0) as xf:
         xf.write_declaration()
         # xf.write_doctype('<!DOCTYPE root SYSTEM "some.dtd">')
 
         # generate an element (the root element)
         with xf.element('root'):
             # write a complete Element into the open root element
-            test_ele = etree.Element('test')
-            test_ele.text = 'text value'
-            test_ele['name'] = 'key'
-            xf.write(test_ele)
+            test_ele = etree.Element('test', key1='value1')
+            test_ele.text = ' text value '
+            xf.write(test_ele, pretty_print=True)
 
             # generate and write more Elements, e.g. through iterparse
             # for element in generate_some_elements():
@@ -80,7 +80,28 @@ def aaa():
                 # xf.write(element)
 
             # or write multiple Elements or strings at once
-            xf.write(etree.Element('start'), "text", etree.Element('end'))
+            xf.write(etree.Element('start'), "text", etree.Element('end'), pretty_print=True)
+
+def test_write():
+    current_dir = path.dirname(path.abspath(__file__))
+    xml_file_path = f'{current_dir}{sep}resources{sep}strings.xml'
+    # xml_file_path = 'somefile.xml'
+    print(f'xml 文件路径：{xml_file_path}')
+    
+    parser = etree.XMLParser(remove_comments=False, strip_cdata=False, remove_blank_text=False)
+    tree = etree.parse(xml_file_path, parser)
+    root = tree.getroot()
+    
+    for ele in root:
+        if ele.get('name') == 'sms':
+            ele.text = 'I find sms'
+
+
+    # with_tail: False to skip over tail text
+    # strip_text: set to true to strip whitespace before and after text content
+    tree.write('test_aaabbb.xml', encoding='utf-8', method='xml', pretty_print=True, 
+        xml_declaration='<?xml version="1.0" encoding="utf-8"?>', with_tail=False)
+    pass
 
 def testCData():
     """
@@ -90,6 +111,9 @@ def testCData():
     root = etree.XML('<root><![CDATA[test]]></root>', parser)
     print(root.text)
 
+def test_import():
+    sys.path.append("C:/Python/PythonLearn/excel")
+
 if __name__ == '__main__':
-    write_xml()
+    test_write()
     
