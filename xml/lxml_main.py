@@ -35,6 +35,9 @@ def read_xml():
     # print(root[1].getnext().get('name')) # 获取当前元素的后一个元素
 
 def write_xml():
+    """
+    https://lxml.de/tutorial.html#serialisation
+    """
     root = etree.Element('html', version='5.0')
     etree.SubElement(root, 'head')
     etree.SubElement(root, 'title', bgColor='red', fondsize='22')
@@ -43,11 +46,13 @@ def write_xml():
     # root.set("hello", "Huhu")
     aaa_ele = etree.Element('aaa', interesting="totally")
     aaa_ele.text = 'aaa value'
-
     # 修改或添加属性
     aaa_ele.set('interesting', 'totally-2')
     aaa_ele.set('name', 'hahah')
     root.append(aaa_ele)
+
+    # root.append(etree.Entity("#234"))
+    # root.append(etree.Comment("some comment"))
 
     # 直接操作属性字典
     # attributes = aaa_ele.attrib
@@ -59,8 +64,16 @@ def write_xml():
 
     root.insert(0, etree.Element("child0"))
 
+    # you can add whitespace indentation to the tree before serialising it, using the indent() function
+    etree.indent(root, space="   ")
     result = etree.tostring(root, pretty_print=True, xml_declaration=True, encoding='utf-8').decode('utf-8')
     print(result)
+    save_to_file('mobiles.xml', result)
+
+def save_to_file(file_name, contents):
+    fh = open(file_name, 'w')
+    fh.write(contents)
+    fh.close()
     
 def test_xmlfile():
     with etree.xmlfile('somefile.xml', encoding='utf-8', close=True, compression=0) as xf:
@@ -100,8 +113,7 @@ def test_write():
     # with_tail: False to skip over tail text
     # strip_text: set to true to strip whitespace before and after text content
     tree.write('test_aaabbb.xml', encoding='utf-8', method='xml', pretty_print=True, 
-        xml_declaration='<?xml version="1.0" encoding="utf-8"?>', with_tail=False)
-    pass
+        with_tail=False)
 
 def testCData():
     """
@@ -115,5 +127,5 @@ def test_import():
     sys.path.append("C:/Python/PythonLearn/excel")
 
 if __name__ == '__main__':
-    test_write()
+    write_xml()
     
