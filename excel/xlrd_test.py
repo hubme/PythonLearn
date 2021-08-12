@@ -11,6 +11,7 @@ import xlrd
 from os import path, sep
 import os
 
+
 def test2():
     current_dir = path.dirname(path.abspath(__file__))
     file_name = f'{current_dir}{sep}sample.xls'
@@ -42,11 +43,13 @@ def test2():
             print(sheet.row(rx))
         print()
 
+
 def get_filename(path):
     if path:
         return path.split(os.sep)[-1].split('.')[0]
     else:
         return None
+
 
 def test3():
     print(get_filename('C:\\Test\\v2idemo.text'))
