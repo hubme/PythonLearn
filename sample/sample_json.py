@@ -1,14 +1,21 @@
 # coding: utf-8
 
-from dataclasses import dataclass
+"""" https://docs.python.org/zh-cn/3/library/dataclasses.html """
+
+from dataclasses import dataclass, field
 import json
 
 
-@dataclass
+# frozen = True 表示对象是不可变对象，初始化完成之后，不可对成员重新赋值
+# order = True，会生成__lt__(), __le__(), __gt__(), __ge__()方法
+# 如果 eq 和 frozen 都是 True，则会生成 __hash__ 方法
+# 当自定义了 __init__()时，init 参数会被忽略
+@dataclass(frozen=True)
 class Person:
     id: str
     name: str
     age: int
+    sex: bool = field(compare=False)  # 标记此字段不参比较
 
 
 def json2obj():
