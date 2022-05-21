@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="label">Switch to Work</string>
+    <!-- This is a Comment -->
+    <string name="label" age="18">Switch to Work</string>
     <string name="location">Location</string>
     <string name="sms">SMS</string>
-    <string name="cfTemplateNotForwarded"><xliff:g id="bearer_service_code">{0}</xliff:g>: Not forwarded</string>
+    <string name="cfTemplateNotForwarded">
+        <xliff:g id="bearer_service_code">{0}</xliff:g>
+        : Not forwarded
+    </string>
     <string-array name="network_switch_type_name">
         <item>mobile data</item>
         <item>Wi-Fi</item>
@@ -15,5 +19,7 @@
         <item quantity="one">Certificate authority installed</item>
         <item quantity="other">Certificate authorities installed</item>
     </plurals>
-    <string name="info_consent"><![CDATA[Consent《<font color=\'#45B731\'>Free Replacement Agreement</font>》]]></string>
+    <string name="info_consent">
+        <![CDATA[Consent《<font color=\'#45B731\'>Free Replacement Agreement</font>》]]>
+    </string>
 </resources>

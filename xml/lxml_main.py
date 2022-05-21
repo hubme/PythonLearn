@@ -1,38 +1,49 @@
 # coding: utf-8
+"""
+https://lxml.de/tutorial.html
+https://lxml.de/api/index.html
+"""
 
-# from os import path
 from os import path, sep
-from io import StringIO, BytesIO
+# from io import StringIO, BytesIO
 from lxml import etree
 from pprint import pprint
 import sys
 
+
+def get_cur_dir():
+    """ 获取当前文件的目录 """
+    return path.dirname(path.abspath(__file__))
+
+
 def read_xml():
     """
-    https://lxml.de/tutorial.html
     https://lxml.de/parsing.html
     https://developer.android.com/guide/topics/resources/string-resource
     """
-    current_dir = path.dirname(path.abspath(__file__))
-    xml_file_path = f'{current_dir}{sep}resources{sep}strings.xml'
+    xml_file_path = f'{get_cur_dir()}{sep}resources{sep}strings.xml'
     print(f'xml 文件路径：{xml_file_path}')
 
     # remove_comments - discard comments
-    parser = etree.XMLParser(remove_comments=True, strip_cdata=False)
+    parser = etree.XMLParser(remove_comments=False, strip_cdata=False)
     tree = etree.parse(xml_file_path, parser)
 
     root = tree.getroot()
     print(f'根节点：{root.tag}')
     # pprint(etree.tostring(root, pretty_print=True).decode('utf-8'))
     for e in root:
-        print(e.tag, e.get('name'), e.text, '子元素个数：', len(e))
+        if e.tag is etree.Comment:
+            print(f'注释元素：{e.text}')
+        else:
+            print(f"tag: {e.tag}, 属性列表: {e.items()}, 属性的key列表: {e.keys()}, 属性的值列表: {e.values()}, name 属性的值: {e.get('name')}, 子元素个数：{len(e)}")
         # 有子元素
-        """ if len(e) > 0:
+        if len(e):
             for ele in e:
-                print(ele.tag, ele.text) """
-
+                print(ele.tag, ele.text)
+        print()
     # print(root[1].getprevious().get('name')) # 获取当前元素的前一个元素
     # print(root[1].getnext().get('name')) # 获取当前元素的后一个元素
+
 
 def write_xml():
     """
@@ -70,11 +81,13 @@ def write_xml():
     print(result)
     save_to_file('mobiles.xml', result)
 
+
 def save_to_file(file_name, contents):
     fh = open(file_name, 'w')
     fh.write(contents)
     fh.close()
-    
+
+
 def test_xmlfile():
     with etree.xmlfile('somefile.xml', encoding='utf-8', close=True, compression=0) as xf:
         xf.write_declaration()
@@ -89,31 +102,31 @@ def test_xmlfile():
 
             # generate and write more Elements, e.g. through iterparse
             # for element in generate_some_elements():
-                # serialise generated elements into the XML file
-                # xf.write(element)
+            # serialise generated elements into the XML file
+            # xf.write(element)
 
             # or write multiple Elements or strings at once
             xf.write(etree.Element('start'), "text", etree.Element('end'), pretty_print=True)
+
 
 def test_write():
     current_dir = path.dirname(path.abspath(__file__))
     xml_file_path = f'{current_dir}{sep}resources{sep}strings.xml'
     # xml_file_path = 'somefile.xml'
     print(f'xml 文件路径：{xml_file_path}')
-    
+
     parser = etree.XMLParser(remove_comments=False, strip_cdata=False, remove_blank_text=False)
     tree = etree.parse(xml_file_path, parser)
     root = tree.getroot()
-    
+
     for ele in root:
         if ele.get('name') == 'sms':
             ele.text = 'I find sms'
 
-
     # with_tail: False to skip over tail text
     # strip_text: set to true to strip whitespace before and after text content
-    tree.write('test_aaabbb.xml', encoding='utf-8', method='xml', pretty_print=True, 
-        with_tail=False)
+    tree.write('test_aaabbb.xml', encoding='utf-8', method='xml', pretty_print=True, with_tail=False)
+
 
 def testCData():
     """
@@ -123,9 +136,14 @@ def testCData():
     root = etree.XML('<root><![CDATA[test]]></root>', parser)
     print(root.text)
 
+
 def test_import():
     sys.path.append("C:/Python/PythonLearn/excel")
 
+
+def test_pprint():
+    pprint([1, 2, 3, 4])
+
+
 if __name__ == '__main__':
-    write_xml()
-    
+    read_xml()
