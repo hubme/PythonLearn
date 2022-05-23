@@ -35,7 +35,9 @@ def read_xml():
         if e.tag is etree.Comment:
             print(f'注释元素：{e.text}')
         else:
-            print(f"tag: {e.tag}, 属性列表: {e.items()}, 属性的key列表: {e.keys()}, 属性的值列表: {e.values()}, name 属性的值: {e.get('name')}, 子元素个数：{len(e)}")
+            print(
+                f"tag: {e.tag}, text: {e.text}, 属性列表: {e.items()}, 属性的key列表: {e.keys()}, 属性的值列表: {e.values()}, name 属性的值: {e.get('name')}, 子元素个数：{len(e)}"
+            )
         # 有子元素
         if len(e):
             for ele in e:
@@ -45,11 +47,36 @@ def read_xml():
     # print(root[1].getnext().get('name')) # 获取当前元素的后一个元素
 
 
+def write_string_xml():
+
+    NSMAP = {'xliff': 'urn:oasis:names:tc:xliff:document:1.2'}
+    root = etree.Element('resources', nsmap=NSMAP)
+    etree.indent(root, space="    ")
+    parser = etree.XMLParser(encoding='utf-8', remove_comments=False, strip_cdata=False, remove_blank_text=False)
+    tree = etree.ElementTree(root, parser=parser)
+
+    etree.SubElement(root, 'string', {'name': 'install_failed_incompatible', 'product': 'tv'}).text = 'tv'
+
+    sub_ele = etree.Element('string', {'name': 'install_failed_incompatible', 'product': 'table'})
+    sub_ele.text = 'table'
+    root.append(sub_ele)
+
+    # Element 树完成后设置 https://lxml.de/api/lxml.etree-module.html#indent
+    etree.indent(tree, space='    ')
+    result = etree.tostring(root, pretty_print=True, xml_declaration=False, encoding='utf-8').decode('utf-8')
+    print(result)
+    path = f'{get_cur_dir()}{sep}resources{sep}test.xml'
+    # tree.write(path, encoding='utf-8', pretty_print=True)
+    save_to_file(path, result)
+
+
 def write_xml():
     """
     https://lxml.de/tutorial.html#serialisation
     """
-    root = etree.Element('html', version='5.0')
+    XHTML_NAMESPACE = "http://www.w3.org/1999/xhtml"
+    NSMAP = {None: XHTML_NAMESPACE}
+    root = etree.Element('html', version='5.0', nsmap=NSMAP)
     etree.SubElement(root, 'head')
     etree.SubElement(root, 'title', bgColor='red', fondsize='22')
     etree.SubElement(root, 'body', fontsize='15')
@@ -79,13 +106,15 @@ def write_xml():
     etree.indent(root, space="   ")
     result = etree.tostring(root, pretty_print=True, xml_declaration=True, encoding='utf-8').decode('utf-8')
     print(result)
-    save_to_file('mobiles.xml', result)
+    save_to_file(f'{get_cur_dir()}{sep}resources{sep}mobiles.xml', result)
 
 
 def save_to_file(file_name, contents):
-    fh = open(file_name, 'w')
-    fh.write(contents)
-    fh.close()
+    # fh = open(file_name, 'w')
+    # fh.write(contents)
+    # fh.close()
+    with open(file_name, 'w') as writter:
+        writter.write(contents)
 
 
 def test_xmlfile():
@@ -110,8 +139,7 @@ def test_xmlfile():
 
 
 def test_write():
-    current_dir = path.dirname(path.abspath(__file__))
-    xml_file_path = f'{current_dir}{sep}resources{sep}strings.xml'
+    xml_file_path = f'{get_cur_dir()}{sep}resources{sep}mobiles.xml'
     # xml_file_path = 'somefile.xml'
     print(f'xml 文件路径：{xml_file_path}')
 
@@ -146,4 +174,4 @@ def test_pprint():
 
 
 if __name__ == '__main__':
-    read_xml()
+    write_string_xml()
