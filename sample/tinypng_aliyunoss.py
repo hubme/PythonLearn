@@ -10,6 +10,9 @@ from urllib.parse import unquote, urlparse
 """
 https://tinypng.com/developers/reference/python
 设置本地或远程图片后，通过 tinypng 在线压缩后，再上传到阿里云 OSS。
+
+https://zetcode.com/python/pillow/
+https://github.com/janbodnar/pillow-examples
 """
 
 
