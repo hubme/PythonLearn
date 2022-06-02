@@ -13,6 +13,7 @@ https://tinypng.com/developers/reference/python
 
 https://zetcode.com/python/pillow/
 https://github.com/janbodnar/pillow-examples
+https://github.com/aliyun/aliyun-oss-python-sdk
 """
 
 
